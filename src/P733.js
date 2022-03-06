@@ -15,23 +15,26 @@ var floodFill = function(image, sr, sc, newColor) {
 };
 
 var floodFill = function(image, sr, sc, newColor) {
+    let lineLen = image.length, comlunLen = image[0].length;
+    let oldColor = image[sr][sc];
 
-    let lineLen=image.length, rowLine=image[0].length;
-    let oldColor=image[sr][sc];
-    let queue=[[sr,sc]];
-    if(oldColor==newColor) return image;
+    if (oldColor = newColor){
+        return image;
+    }
 
-    ///DFS(use iterator)
-    const DFS=(line,row)=>{
-        if(line<0||line>=lineLen||row<0||row>=rowLine||image[line][row]!=oldColor) return false;
-        image[line][row]=newColor;
-        DFS(line-1,row);
-        DFS(line+1,row);
-        DFS(line,row-1);
-        DFS(line,row+1);
+    const DFS =(line,comlun) => {
+        if(line<0||line>=lineLen||comlun<0||comlun>=comlunLen||image[line][comlun]!=oldColor){
+            return false;
+        }
+        image[line,comlun] = newColor;
+        DFS(line-1,comlun);
+        DFS(line+1,comlun);
+        DFS(line,comlun-1);
+        DFS(line,comlun+1);
     }
 
     DFS(sr,sc);
-    return image;
-};
 
+    return image;
+
+}
